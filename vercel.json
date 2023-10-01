@@ -5,7 +5,7 @@
       }
     },
     "routes": [
-      { "src": "/WorkOrderProcedure/(.*)",  "dest": "/api/WorkOrderProcedure/$1" }
+      { "src": "/WorkOrderProcedure/APIFindWorkOrderWithProcedureAndEmployeeByCpf.php",  "dest": "/api/WorkOrderProcedure/APIFindWorkOrderWithProcedureAndEmployeeByCpf.php" }
     ],
     "build": {
       "env": {
