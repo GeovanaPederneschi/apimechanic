@@ -1,11 +1,11 @@
 {
-    "functions": {
-      "api/*.php": {
-        "runtime": "vercel-php@0.6.0"
-      }
-    },
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
     "routes": [
-      { "src": "/WorkOrderProcedure/APIFindWorkOrderWithProcedureAndEmployeeByCpf.php",  "dest": "/api/WorkOrderProcedure/APIFindWorkOrderWithProcedureAndEmployeeByCpf.php" }
+      { "src": "/WorkOrderProcedure/",  "dest": "/api/WorkOrderProcedure/$1" }
     ],
     "build": {
       "env": {
