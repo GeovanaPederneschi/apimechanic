@@ -8,7 +8,7 @@ $response = array();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
-    require_once('../dbConnect.php');
+    require_once('Connect.php');
 
     mysqli_set_charset($con, "utf8");
 

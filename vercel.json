@@ -1,15 +1,8 @@
 {
-  "functions": {
-    "api/**/*.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
-  },
-    "routes": [
-      { "src": "/WorkOrderProcedure/(.*)",  "dest": "/api/WorkOrderProcedure/$1" }
-    ],
-    "build": {
-      "env": {
-        "NOW_PHP_DEBUG": "1"
+    "functions": {
+      "api/*.php": {
+        "runtime": "vercel-php@0.6.0"
       }
     }
+    
   }
