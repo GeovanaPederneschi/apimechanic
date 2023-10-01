@@ -8,7 +8,7 @@ $response = array();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
-    require_once('Connect.php');
+    require_once('dbConnect.php');
 
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
