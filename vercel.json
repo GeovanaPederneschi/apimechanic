@@ -6,5 +6,10 @@
     },
     "routes": [
       { "src": "/WorkOrderProcedure/(.*)",  "dest": "/api/WorkOrderProcedure/$1" }
-    ]
+    ],
+    "build": {
+      "env": {
+        "NOW_PHP_DEBUG": "1"
+      }
+    }
   }
