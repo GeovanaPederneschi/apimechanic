@@ -17,24 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $cpf = $_POST['cpf'];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from view_funcionario_mecanico WHERE cpf = ?");
+    "SELECT * from tb_funcionario WHERE cpf = ?");
     mysqli_stmt_bind_param($statement,"s",$cpf);
 
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
     mysqli_stmt_bind_result($statement,
-                            $cpf,
-                            $nome,
-                            $tipoFuncionario,
-                            $cadastroDatetime,
-                            $senha,
-                            $email,
+						    $cpf,
+						    $nome,
+						    $tipoFuncionario,
+						    $cadastroDatetime,
+						    $senha,
+						    $email,
                             $rg,
                             $telefone1,
                             $telefone2,
                             $status,
-                            $nascimento,
-                            $tipoMecanico
+                            $nascimento
                         ); 
  
 
@@ -53,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 "telefone1" => $telefone1,
                 "telefone2" => $telefone2,
                 "status" => $status,
-                "nascimento_date" => $nascimento,
-                "tipo_mecanico" => $tipoMecanico
+                "nascimento_date" => $nascimento
                 )
             );
         }
