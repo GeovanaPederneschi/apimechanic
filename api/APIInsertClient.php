@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
   
        
         $response["affect_nums"] = mysqli_stmt_affected_rows($statement);
-        $response["status"] = "foi";
+        $response["status"] = true;
     
 
     echo json_encode($response);
