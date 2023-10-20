@@ -17,16 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $plate = "%{$_POST['placa']}%";
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from view_veiculo_cliente WHERE `placa` LIKE ?");
+    "SELECT * from tb_veiculo WHERE `placa` LIKE ?");
     mysqli_stmt_bind_param($statement,"s",$plate);
 
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
     mysqli_stmt_bind_result($statement,
-						    $id,
-						    $dataCadastroCliente,
-						    $tipoCliente,
-						    $id_tb_relacionamento,
                             $placa,
                             $marca,
                             $cadastro_datatimeVeiculo,
@@ -34,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                             $chassi,
                             $ano,
                             $cor,
-                            $combustivel,
                             $tracao,
+                            $combustivel,
                             $estado,
                             $cidade,
                             $numeroFrota,
@@ -49,10 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
         while (mysqli_stmt_fetch($statement)) {
 
             array_push($response, array(
-                "idtb_cliente" => $id,
-				"data_cadastro" => $dataCadastroCliente,
-				"tipo_cliente" => $tipoCliente,
-				"idtb_r_veiculo_cliente" => $id_tb_relacionamento,
 				"placa" => $placa,
                 "marca" => $marca,
 				"cadastro_datetime" => $cadastro_datatimeVeiculo,
