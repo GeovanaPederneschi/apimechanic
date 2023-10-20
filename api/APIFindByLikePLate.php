@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $plate = "%{$_POST['placa']}%";
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from view_cliente_veiculo WHERE `placa` LIKE ?");
+    "SELECT * from view_veiculo_cliente WHERE `placa` LIKE ?");
     mysqli_stmt_bind_param($statement,"s",$plate);
 
     mysqli_stmt_execute($statement);

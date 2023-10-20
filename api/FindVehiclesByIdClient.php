@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $id_cliente = $_POST['id'];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from view_cliente_veiculo WHERE `idtb_cliente` = ?");
+    "SELECT * from view_veiculo_cliente WHERE `idtb_cliente` = ?");
     mysqli_stmt_bind_param($statement,"i",$id_cliente);
 
     mysqli_stmt_execute($statement);
