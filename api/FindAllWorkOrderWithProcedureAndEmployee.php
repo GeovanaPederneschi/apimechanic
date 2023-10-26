@@ -14,11 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_set_charset($con, "utf8");
 
-    $cpf = $_POST['cpf'];
-
     $statement = mysqli_prepare($con, 
-    "SELECT * FROM view_ordem_funcionario_dados WHERE cpf_tb_funcionario_view = ? AND status_atribuicao_valida = 'VALID' AND status_andamento_ordem != 'COMPLETED'");
-    mysqli_stmt_bind_param($statement,"s",$cpf);
+    "SELECT * FROM view_ordem_funcionario_dados WHERE status_atribuicao_valida = 'VALID' AND status_andamento_ordem != 'COMPLETED'");
 
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
