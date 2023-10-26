@@ -24,10 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_stmt_store_result($statement);
     mysqli_stmt_bind_result($statement,
 						    $id,
+                            $codTSV,
+                            $tipoOperacao,
 						    $nome,
                             $tempo,
                             $modoAtribuicao,
-                            $tipoOrdem
+                            $tipoOrdem,
+                            $tipoSeccao
                         ); 
  
 
@@ -37,10 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
             array_push($response, array(
                 "id_ordens" => $id,
+                "cod_tsv" => $codTSV,
+                "tipo_operacao" => $tipoOperacao,
 				"nome_ordens" => $nome,
                 "tempo_padrao" => $tempo,
                 "modo_atribuicao" => $modoAtribuicao,
-                "categoria_ordem" => $tipoOrdem
+                "categoria_ordem" => $tipoOrdem,
+                "categoria_seccao" => $tipoSeccao
                 )
             );
         }
