@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 "categoria_seccao" => $categoriaSecaoOrdem,
                 "placa_tb_veiculo" => $placa,
                 "marca" => $marca,
-				"cadastro_datetime" => $cadastro_datatimeVeiculo,
+				"cadastro_datetime" => $cadastroVeiculo,
                 "modelo" => $modelo,
                 "chassi" => $chassi,
                 "ano_fabricacao" => $ano,
