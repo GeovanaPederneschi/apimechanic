@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                             $tipoVeiculo,
                             $idCliente,
                             $cadastroCliente,
+                            $tipoCliente,
                             $identificacao,
                             $nomeCliente,
                             $telefone1,
