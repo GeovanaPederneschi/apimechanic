@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $status = $_POST["status"];
 
     $statement = mysqli_prepare($con, 
-    "INSERT INTO `tb_r_ordem_procedimento_enum_ordens`(`id_tb_ordem_servico_procedimento`,`id_tb_enum_ordens`,`status_andamento`)
+    "INSERT INTO `tb_r_ordem_procedimento_enum_ordens`(`id_tb_ordem_servico_procedimento`,`id_tb_enum_ordens`,`status_andamento_ordem`)
     VALUES (?, ?, ?)");
     
     mysqli_stmt_bind_param($statement,"iis",$id_procedimento, $id_ordem,$status);
