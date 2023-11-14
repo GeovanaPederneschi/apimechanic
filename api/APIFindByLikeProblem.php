@@ -14,10 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_set_charset($con, "utf8");
 
-    $problema = "%{$_POST['problema']}%";
+    $problemaLike = "%{$_POST['problema']}%";
+    $problema = $_POST['problema'];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from  tb_enum_problemas_relatados WHERE problema_relatado LIKE ?");
+    "SELECT * FROM tb_enum_problemas_relatados WHERE MATCH(problema_relatado) AGAINST (?)");
     mysqli_stmt_bind_param($statement,"s",$problema);
 
     mysqli_stmt_execute($statement);

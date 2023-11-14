@@ -14,10 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_set_charset($con, "utf8");
 
-    $ordem = "%{$_POST['ordem']}%";
+    $ordemLike = "%{$_POST['ordem']}%";
+    $ordem = $_POST['ordem'];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from  tb_enum_ordens WHERE nome_ordens LIKE ?");
+    "SELECT * FROM tb_enum_ordens WHERE MATCH(nome_ordens) AGAINST (?)");
     mysqli_stmt_bind_param($statement,"s",$ordem);
 
     mysqli_stmt_execute($statement);
