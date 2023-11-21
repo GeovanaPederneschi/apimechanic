@@ -22,22 +22,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
     mysqli_stmt_bind_result($statement,
-						    $idOrdem,
-						    $nomeOrdem,
-						    $pergunta
-                        ); 
- 
+        $idPerguntaOrdem,
+        $idOrdem,
+        $nomeOrdem,
+        $idPergunta,
+        $pergunta
+    ); 
+
 
     if (mysqli_stmt_num_rows($statement) > 0) {
 
         while (mysqli_stmt_fetch($statement)) {
 
-            array_push($response, array(
-                "id_ordens" => $idOrdem,
-				"nome_ordens" => $nomeOrdem,
-				"pergunta_servicos" => $pergunta
-                )
-            );
+        array_push($response, array(
+            "id_tb_enum_perguntas_ordens" => $idPerguntaOrdem,
+            "id_ordens" => $idOrdem,
+            "nome_ordens" => $nomeOrdem,
+            "id_tb_enum_perguntas"  => $idPergunta,
+            "pergunta_servicos" => $pergunta
+            ));
         }
         
           
