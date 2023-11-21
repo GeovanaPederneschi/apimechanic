@@ -18,21 +18,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $cadastroDatetime = $_POST["cadastro_datetime"];
 
     $statement = mysqli_prepare($con, 
-    "UPDATE `tb_r_ordem_procedimento_ordens_funcionario` SET `status_atribuicao_valida` = 'INVALID' WHERE (`id_tb_r_ordem_procedimento_enum_ordens` = ?);
-    INSERT INTO `tb_r_ordem_procedimento_ordens_funcionario`(`id_tb_r_ordem_procedimento_enum_ordens`,`cpf_tb_funcionario`,`atribuicao_datetime`,`status_atribuicao_valida`)
-    VALUES (?, ?, ?, ?)");
+    "UPDATE `tb_r_ordem_procedimento_ordens_funcionario` SET `status_atribuicao_valida` = 'INVALID' WHERE (`id_tb_r_ordem_procedimento_enum_ordens` = ?)");
     
-    mysqli_stmt_bind_param($statement,"iisss",$id_procedimento,$id_procedimento, $cpf, $cadastroDatetime,$status);
+    mysqli_stmt_bind_param($statement,"i",$id_procedimento);
 
-    mysqli_stmt_execute($statement);
-  
-       
-        $response["affect_nums"] = mysqli_stmt_affected_rows($statement);
-  
-        $response["sucesso"] = true;
+    if(mysqli_stmt_execute($statement)){
+        $statement = mysqli_prepare($con, 
+        "INSERT INTO `tb_r_ordem_procedimento_ordens_funcionario`(`id_tb_r_ordem_procedimento_enum_ordens`,`cpf_tb_funcionario`,`atribuicao_datetime`,`status_atribuicao_valida`)
+        VALUES (?, ?, ?, ?)");
+        
+        mysqli_stmt_bind_param($statement,"isss",$id_procedimento, $cpf, $cadastroDatetime,$status);
+
+        mysqli_stmt_execute($statement);
     
+        
+            $response["affect_nums"] = mysqli_stmt_affected_rows($statement);
+    
+            $response["sucesso"] = true;
+        
 
-    echo json_encode($response);
+        echo json_encode($response);
+    }
     
 } else {
 
