@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_stmt_bind_result($statement,
 						    $idRevisaoOrdemFuncionario,
 						    $idOrdemFuncionario,
+                            $idProcedimentoOrdem,
 						    $cadastroDatetime
                         ); 
  
@@ -35,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
             array_push($response, array(
                 "idtb_revisao_ordem_funcionario" => $idRevisaoOrdemFuncionario,
 				"id_tb_r_ordem_procedimento_ordens_funcionario" => $idOrdemFuncionario,
+                "id_tb_ordem_procedimento_enum_ordens" => $idProcedimentoOrdem,
 				"datetime_cadastro" => $cadastroDatetime
                 )
             );
