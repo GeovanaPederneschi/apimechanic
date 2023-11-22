@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_set_charset($con, "utf8");
 
-    $idOrdemFuncionario = $_POST["idOrdemFuncionario"];
+    $idOrdemFuncionario = $_POST["idRevisaoOrdemFuncionario"];
     $idPerguntaOrdem = $_POST["idPerguntaOrdem"];
     $reposta = $_POST["respostaBoolean"];
     $observacao = $_POST["observacao"];
