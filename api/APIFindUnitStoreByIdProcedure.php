@@ -47,13 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
             array_push($response, array(
                 "id_tb_unidade" => $idUnidade,
                 "nome_unidade" => $nomeUnidade,
-                "cep" => $cep,
-                "rua" => $rua,
-                "bairro" => $bairro,
-                "uf_estado" => $uf,
-                "numero" => $numero,
-                "complemento" => $complemento,
-                "cidade" => $cidade
+                "cep_unidade" => $cep,
+                "rua_unidade" => $rua,
+                "bairro_unidade" => $bairro,
+                "uf_unidade" => $uf,
+                "numero_unidade" => $numero,
+                "complemento_unidade" => $complemento,
+                "cidade_unidade" => $cidade
                 )
             );
         }

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $idOrdemProcedimento = $_POST["id"];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * FROM tb_revisao_ordem_funcionario WHERE id_tb_ordem_procedimento_enum_ordens = ?");
+    "SELECT * FROM view_revisao_repostas WHERE id_tb_ordem_procedimento_enum_ordens = ?");
     mysqli_stmt_bind_param($statement,"i",$idOrdemProcedimento);
 
     mysqli_stmt_execute($statement);
