@@ -13,13 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_set_charset($con, "utf8");
 
     $idOrdemProcedimento = $_POST["idOrdemFuncionario"];
+    $idProcedimentoOrdem = $_POST["idProcedimentoOrdem"];
     $cadastroDatetime = $_POST["data_registro"];
 
     $statement = mysqli_prepare($con, 
-    "INSERT INTO `tb_revisao_ordem_funcionario`(`id_tb_r_ordem_procedimento_ordens_funcionario`,`datetime_cadastro`)
+    "INSERT INTO `tb_revisao_ordem_funcionario`(`id_tb_r_ordem_procedimento_ordens_funcionario`,`id_tb_ordem_procedimento_enum_ordens`,`datetime_cadastro`)
     VALUES(?, ?)");
     
-    mysqli_stmt_bind_param($statement,"is",$idOrdemProcedimento,$cadastroDatetime);
+    mysqli_stmt_bind_param($statement,"iis",$idOrdemProcedimento,$idProcedimentoOrdem,$cadastroDatetime);
 
     mysqli_stmt_execute($statement);
   
