@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     "INSERT INTO `tb_r_reposta_revisao_ordem`(`id_tb_revisao_ordem_funcionario`,`id_tb_enum_perguntas_ordens`,`resposta_boolean`,`observacao`)
     VALUES (?, ?, ?, ?)");
     
-    mysqli_stmt_bind_param($statement,"iiss",$idOrdemFuncionario,$idPerguntaOrdem,$reposta,$observacao);
+    mysqli_stmt_bind_param($statement,"iiis",$idOrdemFuncionario,$idPerguntaOrdem,$reposta,$observacao);
 
     mysqli_stmt_execute($statement);
   
