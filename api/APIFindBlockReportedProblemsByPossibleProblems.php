@@ -14,11 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     $stringIDs = $_POST["IDs"];
     $problemasIDs = explode(";",$stringIDs);
-
-    $tipos = "i";
+    $problemasIDs2 = array_merge($problemasIDs,$problemasIDs);
+    $tipos = "ii";
     $in = "?";
     for ($i=1; $i < count($problemasIDs); $i++) { 
-        $tipos .= "i";
+        $tipos .= "ii";
         $in .= ", ?";
     }
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     $statement = mysqli_prepare($con, $string);
 
-    mysqli_stmt_bind_param($statement,$tipos,...$problemasIDs);
+    mysqli_stmt_bind_param($statement,$tipos,...$problemasIDs2);
 
     mysqli_stmt_execute($statement);
 
