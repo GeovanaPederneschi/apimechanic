@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $idBlocoProblema = $_POST['id'];
 
     $statement = mysqli_prepare($con,
-    "SELECT * FROM aview_bloco_problemas_passos_diagnostico WHERE id_tb_enum_bloco_problemas_relatados = ?");
+    "SELECT * FROM view_bloco_problemas_passos_diagnostico WHERE id_tb_enum_bloco_problemas_relatados = ?");
     mysqli_stmt_bind_param($statement,"i",$idBlocoProblema);
 
     mysqli_stmt_execute($statement);
