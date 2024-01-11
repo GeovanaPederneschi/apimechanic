@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     $string = "SELECT idtb_r_enum_bloco_tb_problemas_relatados,
     id_tb_enum_bloco_problemas_relatados,
-    id_tb_enum_problemas_relatados
+    id_tb_enum_problemas_relatados,
     pr.problema_relatado
     FROM tb_r_enum_bloco_tb_problemas_relatados bp
     JOIN tb_enum_problemas_relatados pr
