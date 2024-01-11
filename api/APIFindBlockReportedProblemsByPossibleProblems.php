@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_stmt_bind_result($statement,
 						    $id,
                             $idBloco,
-                            $idProblema
+                            $idProblema,
+                            $problema
                         ); 
  
 
@@ -55,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
             array_push($response, array(
                     "idtb_r_enum_bloco_tb_problemas_relatados" => $id,
                     "id_tb_enum_bloco_problemas_relatados" => $idBloco,
-                    "id_tb_enum_problemas_relatados" => $idProblema
+                    "id_tb_enum_problemas_relatados" => $idProblema,
+                    "problema_relatado" => $problema
                 )
             );
         }
