@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
             array_push($response, array(
                 "idtb_ordem_diagnostico" => $id,
-                "idtb_ordem_diagnostico" => $idOrdemProcedimentoFuncionario,
+                "idtb_r_ordem_procedimento_ordens_funcionario" => $idOrdemProcedimentoFuncionario,
                 "id_bloco_problema_relatado_escolido" => $idBlocoProblema,
                 "status_ordem_diagnostico" => $status
                 )
