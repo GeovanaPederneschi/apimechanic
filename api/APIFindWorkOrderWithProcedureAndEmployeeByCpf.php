@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                             $modoAtribuicao,
                             $categoriaOrder,
                             $idOrdemProcedimento,
+                            $idCliente,
                             $placaVeiculo,
                             $modeloVeiculo,
                             $statusAndamentoProcedimento
@@ -64,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                     "modo_atribuicao" => $modoAtribuicao,
                     "categoria_ordem" => $categoriaOrder,
                     "idtb_ordem_servico_procedimento" => $idOrdemProcedimento,
+                    "id_tb_cliente" => $idCliente,
                     "placa_tb_veiculo" => $placaVeiculo,
                     "modelo_tb_veiculo" => $modeloVeiculo,
                     "status_andamento_procedimento" => $statusAndamentoProcedimento
