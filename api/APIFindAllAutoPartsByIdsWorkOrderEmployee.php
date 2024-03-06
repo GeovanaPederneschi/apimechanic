@@ -24,14 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
         $where .= " OR id_tb_ordens_funcionario = ?";
     }
 
-    /* for ($i=0; $i < count($idOrdemFuncionarioArray); $i++) {
-        $idOrdemFuncionarioArray[$i] = substr_replace($idOrdemFuncionarioArray[$i],"%",0,0);
-        $idOrdemFuncionarioArray[$i] = substr_replace($idOrdemFuncionarioArray[$i],"%",strlen($idOrdemFuncionarioArray[$i]),0);
-    } */
-
 
     $string = "SELECT * FROM view_ordem_funcionario_peca $where";
-    echo($string);
 
     $statement = mysqli_prepare($con, $string);
 
