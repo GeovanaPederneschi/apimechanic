@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
 
     $string = "SELECT * FROM view_ordem_funcionario_peca $where";
+    echo($string);
 
     $statement = mysqli_prepare($con, $string);
 
