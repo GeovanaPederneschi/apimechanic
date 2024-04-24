@@ -14,12 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_set_charset($con, "utf8");
 
-    $problemaLike = "%{$_POST['problema']}%";
-    $problema = $_POST['problema'];
-
     $statement = mysqli_prepare($con, 
-    "SELECT * FROM tb_enum_problemas_relatados WHERE MATCH(problema_relatado) AGAINST (?)");
-    mysqli_stmt_bind_param($statement,"s",$problema);
+    "SELECT * FROM tb_enum_problemas_relatados");
 
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
