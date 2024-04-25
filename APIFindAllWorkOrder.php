@@ -14,9 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_set_charset($con, "utf8");
 
-    $ordemLike = "%{$_POST['ordem']}%";
-    $ordem = $_POST['ordem'];
-
     $statement = mysqli_prepare($con, 
     "SELECT * FROM tb_enum_ordens");
 
