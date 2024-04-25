@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $tipo_insercao = $_POST["tipo_insercao"];
 
     $statement = mysqli_prepare($con, 
-    "INSERT INTO `auto_mechanic`.`tb_enum_problemas_relatados`(`problema_relatado`,`tipo_insercao`)
+    "INSERT INTO `tb_enum_problemas_relatados`(`problema_relatado`,`tipo_insercao`)
     VALUES( ?, ?);
-    SELECT LAST_INSERT_ID()");
+    SELECT LAST_INSERT_ID();");
 
     mysqli_stmt_bind_param($statement,'ss',$problema,$tipo_insercao);
 
