@@ -17,36 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     $statement = mysqli_prepare($con, 
     "INSERT INTO `tb_enum_problemas_relatados`(`problema_relatado`,`tipo_insercao`)
-    VALUES( ?, ?);
-    SELECT LAST_INSERT_ID();");
+    VALUES(?, ?)");
 
-    mysqli_stmt_bind_param($statement,'ss',$problema,$tipo_insercao);
-
+    mysqli_stmt_bind_param($statement, 'ss', $problema, $tipo_insercao);
     mysqli_stmt_execute($statement);
 
-    mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement,
-						    $id
-                        ); 
-  
-                        if (mysqli_stmt_num_rows($statement) > 0) {
+    $id = mysqli_insert_id($con);
 
-                            while (mysqli_stmt_fetch($statement)) {
-                    
-                                array_push($response, array(
-                                    "idtb_problemas_relatados" => $id,
-                                    "affect_nums" => mysqli_stmt_affected_rows($statement)
-                                    )
-                                );
-                            }
-                            
-                              
-                              
-                        } else {
-                        
-                               $response["sucesso"] = false;
-                               $response["affect_nums"] = mysqli_stmt_affected_rows($statement);
-                        }
+    $response["idtb_problemas_relatados"] = $id;
+    $response["affect_nums"] = mysqli_stmt_affected_rows($statement);
 
     echo json_encode($response);
     
