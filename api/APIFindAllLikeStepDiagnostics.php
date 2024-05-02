@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_set_charset($con, "utf8");
 
-    $passoLike = "%{$_POST['passo']}%";
-    $passo = $_POST['passo'];
+    $passoLike = "%{$_POST['step']}%";
+    $passo = $_POST['step'];
 
     $statement = mysqli_prepare($con, 
     "SELECT * FROM tb_enum_passos_diagnostico WHERE MATCH(nome_passo) AGAINST (?)");
