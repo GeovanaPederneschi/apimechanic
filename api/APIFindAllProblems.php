@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
         while (mysqli_stmt_fetch($statement)) {
 
             array_push($response, array(
-                "idtb_problemas_relatados" => $id,
+                "idtb_problemas_relatados" => $idProblema,
 				"problema_relatado" => $problemaRelatado,
                 "tipo_insercao" => $tipoInsercao,
                 "idtb_r_problema_funcionario_ordem" => $idProblemaFuncionarioOrdem,
