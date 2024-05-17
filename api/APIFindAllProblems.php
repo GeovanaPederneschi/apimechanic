@@ -15,14 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_set_charset($con, "utf8");
 
     $statement = mysqli_prepare($con, 
-    "SELECT * FROM tb_enum_problemas_relatados");
+    "SELECT * FROM view_outer_problemas_relatados_inserido_funcionario_ordem");
 
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
     mysqli_stmt_bind_result($statement,
-						    $id,
+						    $idProblema,
 						    $problemaRelatado,
-                            $tipoInsercao
+                            $tipoInsercao,
+                            $idProblemaFuncionarioOrdem,
+                            $cpfFuncionario,
+                            $idFuncionarioOrdem,
+                            $statusInsercao
                         ); 
  
 
@@ -33,7 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
             array_push($response, array(
                 "idtb_problemas_relatados" => $id,
 				"problema_relatado" => $problemaRelatado,
-                "tipo_insercao" => $tipoInsercao
+                "tipo_insercao" => $tipoInsercao,
+                "idtb_r_problema_funcionario_ordem" => $idProblemaFuncionarioOrdem,
+                "cpf_funcionario" => $cpfFuncionario,
+                "id_ordens_funcionario" => $idFuncionarioOrdem,
+                "status" => $statusInsercao
                 )
             );
         }
