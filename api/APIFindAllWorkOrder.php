@@ -27,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                             $tempo,
                             $modoAtribuicao,
                             $tipoOrdem,
-                            $tipoSeccao
+                            $tipoSeccao,
+                            $tipoInsercao
                         ); 
  
 
@@ -43,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 "tempo_padrao" => $tempo,
                 "modo_atribuicao" => $modoAtribuicao,
                 "categoria_ordem" => $tipoOrdem,
-                "categoria_seccao" => $tipoSeccao
+                "categoria_seccao" => $tipoSeccao,
+                "tipo_insercao" => $tipoInsercao
                 )
             );
         }
