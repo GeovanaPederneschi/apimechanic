@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     $statement = mysqli_prepare($con,
     "UPDATE `auto_mechanic`.`tb_r_bloco_problema_funcionario_ordem`SET `status_insercao_passos_diagnostico` = ?
-    WHERE `idtb_r_bloco_problema_funcionario_ordem` = ?");
+    WHERE `id_tb_bloco_problemas_relatados` = ?");
 
     mysqli_stmt_bind_param($statement,"si",$status, $id);
 
