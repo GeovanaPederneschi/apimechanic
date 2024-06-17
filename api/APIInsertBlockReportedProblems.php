@@ -23,9 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
     mysqli_stmt_execute($statement);
   
+    $id = mysqli_insert_id($con);
        
         $response["affect_nums"] = mysqli_stmt_affected_rows($statement);
-  
+        $response["idtb_bloco_problemas_relatados"] = $id;
         $response["sucesso"] = true;
     
 
