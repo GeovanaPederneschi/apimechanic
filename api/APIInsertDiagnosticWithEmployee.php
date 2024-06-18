@@ -13,14 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_set_charset($con, "utf8");
 
     $idDiagnostico = $_POST["idDiagnostic"];
+    $cpfFuncionario = $_POST["cpf_funcionario"];
     $idOrdemFuncionario = $_POST["id_ordem_funcionario"];
     $status = $_POST["status"];
     
     $statement = mysqli_prepare($con, 
     "INSERT INTO `auto_mechanic`.`tb_r_diagnostico_funcionario_ordem`(`id_tb_enum_diagnostico`,`cpf_funcionario`,`id_ordens_funcionario`,`status`)
-    VALUES (?, null, ?, ?)");
+    VALUES (?, ?, ?, ?)");
     
-    mysqli_stmt_bind_param($statement,"iis",$idDiagnostico,$idOrdemFuncionario,$status);
+    mysqli_stmt_bind_param($statement,"isis",$idDiagnostico,$cpfFuncionario,$idOrdemFuncionario,$status);
 
     mysqli_stmt_execute($statement);
   
