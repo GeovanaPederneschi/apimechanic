@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                             $idOrdemFuncionarioView,
                             $statusBlocoOrdemFuncionario,
                             $statusInsercaoDiagnostico,
-                            $statusInsercaoPassos
+                            $statusInsercaoPassos,
+                            $statusInsercaoOrdens
                         ); 
  
 
@@ -57,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 "id_ordens_funcionario" => $idOrdemFuncionarioView,
                 "status" => $statusBlocoOrdemFuncionario,
                 "status_insercao_diagnostico" => $statusInsercaoDiagnostico,
-                "status_insercao_passos_diagnostico" => $statusInsercaoPassos
+                "status_insercao_passos_diagnostico" => $statusInsercaoPassos,
+                "status_insercao_passos_ordens" => $statusInsercaoOrdens
                 )
             );
         }
