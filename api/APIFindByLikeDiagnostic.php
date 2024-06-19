@@ -17,7 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $diagnostico = $_POST['diagnostico'];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * FROM view_outer_diagnostico_funcionario_ordem WHERE MATCH(nome_diagnostico) AGAINST (?)");
+    "SELECT v.* FROM (SELECT * FROM tb_enum_diagnostico WHERE MATCH(nome_diagnostico) AGAINST (?)) AS d 
+    JOIN view_outer_diagnostico_funcionario_ordem AS v ON d.idtb_diagnostico = v.id_tb_enum_diagnostico");
     mysqli_stmt_bind_param($statement,"s",$diagnostico);
 
     mysqli_stmt_execute($statement);
