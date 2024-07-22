@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
                     $fileData = array(
                         'file' => new CURLFile($fileTmpPath),
                         'upload_preset' => 'ml_default', // Você deve configurar um preset de upload no Cloudinary
-                        'public_id' => 'step_diagnostic/' . $fileName // Definindo o caminho e nome do arquivo
+                        'public_id' => $fileName, // Definindo o nome do arquivo
+                        'folder' => 'step_diagnostic'
                     );
 
                     $ch = curl_init();
