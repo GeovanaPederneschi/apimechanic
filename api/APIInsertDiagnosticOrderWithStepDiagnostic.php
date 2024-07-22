@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
                     );
 
                     $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, 'https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload');
+                    curl_setopt($ch, CURLOPT_URL, $uploadUrl);
                     curl_setopt($ch, CURLOPT_POST, 1);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $fileData);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
