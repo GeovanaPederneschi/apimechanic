@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
                     $fileData = array(
                         'file' => new CURLFile($fileTmpPath),
                         'upload_preset' => 'ml_default', // Você deve configurar um preset de upload no Cloudinary
-                        'public_id' => 'step_diagnostic/' . $fileName,
+                        'public_id' => $fileName,
                         'folder' => 'step_diagnostic'
                     );
 
@@ -93,9 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
                     throw new Exception("Failed to insert initial image record.");
                 }
             }
-
-            $response["image_paths"] = $imagePaths;
             $response["cloudinary_responses"] = $cloudinaryResponses; // Adicionar respostas da Cloudinary à resposta final
+            $response["image_paths"] = $imagePaths;
         }
 
         mysqli_commit($con);
