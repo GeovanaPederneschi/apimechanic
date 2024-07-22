@@ -27,9 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
         // Verificar se há imagens
         if (isset($_FILES['images']) && count($_FILES['images']['tmp_name']) > 0) {
             $imagePaths = array();
-            
-            $uploadPreset = 'ml_default'; // Substitua com o nome do seu preset de upload, se necessário
-            $folderName = 'step_diagnostic'; // Nome da pasta onde as imagens serão salvas
 
             foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
                 // Inserir registro vazio na tabela de imagens para obter o ID
@@ -42,14 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
 
                     // Configurar o cURL para upload
                     $fileTmpPath = $_FILES['images']['tmp_name'][$key];
+                    $fileName = $_FILES['images']['name'][$key];
                     $fileData = array(
                         'file' => new CURLFile($fileTmpPath),
-                        'upload_preset' => $uploadPreset,
-                        'folder' => $folderName // Especifica a pasta onde a imagem será salva
+                        'upload_preset' => 'ml_default' // Você deve configurar um preset de upload no Cloudinary
                     );
 
                     $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $uploadUrl);
+                    curl_setopt($ch, CURLOPT_URL, 'https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload');
                     curl_setopt($ch, CURLOPT_POST, 1);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $fileData);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -61,7 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
 
                     curl_close($ch);
 
+                    // Debug: exibir a resposta da Cloudinary
+                    error_log("Cloudinary Response: " . $response);
+
                     $responseData = json_decode($response, true);
+
+                    if (json_last_error() !== JSON_ERROR_NONE) {
+                        throw new Exception("Invalid JSON response from Cloudinary: " . json_last_error_msg());
+                    }
 
                     if (isset($responseData['secure_url'])) {
                         $imageUrl = $responseData['secure_url'];
