@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
                     curl_setopt($ch, CURLOPT_POST, 1);
                     curl_setopt($ch, CURLOPT_POSTFIELDS, $fileData);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    $response = curl_exec($ch);
+                    $response1 = curl_exec($ch);
 
                     if (curl_errno($ch)) {
                         throw new Exception("cURL error: " . curl_error($ch));
@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
                     curl_close($ch);
 
                     // Armazenar a resposta da Cloudinary
-                    $cloudinaryResponses[] = $response;
+                    $cloudinaryResponses[] = $response1;
 
                     // Verificar se a resposta é um JSON válido
-                    $responseData = json_decode($response, true);
+                    $responseData = json_decode($response1, true);
 
                     if (json_last_error() !== JSON_ERROR_NONE) {
                         throw new Exception("Invalid JSON response from Cloudinary: " . json_last_error_msg());
