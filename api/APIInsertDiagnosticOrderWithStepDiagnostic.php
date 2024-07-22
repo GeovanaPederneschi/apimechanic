@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
 
                         $imagePaths[] = $imageUrl;
                     } else {
-                        throw new Exception("Failed to upload image to Cloudinary: " . $response);
+                        throw new Exception("Failed to upload image to Cloudinary: " . $response1);
                     }
                 } else {
                     throw new Exception("Failed to insert initial image record.");
