@@ -40,10 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
 
                     // Configurar o cURL para upload
                     $fileTmpPath = $_FILES['images']['tmp_name'][$key];
-                    $fileName = $_FILES['images']['name'][$key];
+                    $fileName = $imageId . "_image";
                     $fileData = array(
                         'file' => new CURLFile($fileTmpPath),
-                        'upload_preset' => 'ml_default' // Você deve configurar um preset de upload no Cloudinary
+                        'upload_preset' => 'ml_default', // Você deve configurar um preset de upload no Cloudinary
+                        'public_id' => 'step_diagnostic/' . $fileName // Definindo o caminho e nome do arquivo
                     );
 
                     $ch = curl_init();
@@ -85,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
 
                         $imagePaths[] = $imageUrl;
                     } else {
-                        throw new Exception("Failed to upload image to Cloudinary: " . $response1);
+                        throw new Exception("Failed to upload image to Cloudinary: " . $response1['error']['message']);
                     }
                 } else {
                     throw new Exception("Failed to insert initial image record.");
