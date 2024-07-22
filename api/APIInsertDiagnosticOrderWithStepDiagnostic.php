@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
         // Verificar se há imagens
         if (isset($_FILES['images']) && count($_FILES['images']['tmp_name']) > 0) {
             $imagePaths = array();
+            $cloudinaryResponses = array(); // Para armazenar as respostas da Cloudinary
 
             foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
                 // Inserir registro vazio na tabela de imagens para obter o ID
@@ -58,9 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
 
                     curl_close($ch);
 
-                    // Debug: exibir a resposta da Cloudinary
-                    error_log("Cloudinary Response: " . $response);
+                    // Armazenar a resposta da Cloudinary
+                    $cloudinaryResponses[] = $response;
 
+                    // Verificar se a resposta é um JSON válido
                     $responseData = json_decode($response, true);
 
                     if (json_last_error() !== JSON_ERROR_NONE) {
@@ -91,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] == "Mechanic") {
             }
 
             $response["image_paths"] = $imagePaths;
+            $response["cloudinary_responses"] = $cloudinaryResponses; // Adicionar respostas da Cloudinary à resposta final
         }
 
         mysqli_commit($con);
