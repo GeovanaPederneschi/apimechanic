@@ -75,13 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 array_push($IDsProblems, mysqli_insert_id($con));
             }
 
-            $statementWork = mysqli_prepare($con, 
-                "INSERT INTO `tb_r_ordem_procedimento_enum_ordens`(`id_tb_ordem_servico_procedimento`,`id_tb_enum_ordens`,`status_andamento_ordem`,`tipo_atribuicao`)
-                VALUES (?, ?, ?, ?)");
-            mysqli_stmt_bind_param($statementWork,"iiss",$idWorkProcedure, 8, "UNASSIGNED", "REQUEST"); // ORDEM DIAGNOSTICO
-            mysqli_stmt_execute($statementWork);
-            array_push($IDsWorkOrder, mysqli_insert_id($con));
-
         }
 
         mysqli_commit($con);
