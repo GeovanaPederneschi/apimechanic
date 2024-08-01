@@ -77,16 +77,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
         }
 
-        mysqli_commit($con);
         $response["status"] = true;
         $response["id_procedure"] = $idWorkProcedure;
         $reponse["ids_procedure_ordens"] = $IDsWorkOrder;
-        if(sizeof($IDsWorkOrder)>0){
-            $reponse["ala"] = true;
+        if(sizeof($IDsWorkOrder)<0){
+            mysqli_rollback($con);
+            $reponse["status"] = false;
+        }else{
+            mysqli_commit($con);
         }
 
     }catch(Exception $e){
-        mysqli_rollback($con);
         $response["status"] = false;
         $response["error"] = $e->getMessage();
     }
