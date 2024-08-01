@@ -81,6 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
         $response["status"] = true;
         $response["id_procedure"] = $idWorkProcedure;
         $reponse["ids_procedure_ordens"] = $IDsWorkOrder;
+        if(sizeof($IDsWorkOrder)>0){
+            $reponse["ala"] = true;
+        }
 
     }catch(Exception $e){
         mysqli_rollback($con);
