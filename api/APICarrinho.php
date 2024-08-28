@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ap3 = $data['access_points'][2];
 
         // Obtenha as posições dos APs da API
-        $ap1_pos = $accessPoints[$ap1['name']];
-        $ap2_pos = $accessPoints[$ap2['name']];
-        $ap3_pos = $accessPoints[$ap3['name']];
+        $ap1_pos = $accessPoints[$ap1['ssid']];
+        $ap2_pos = $accessPoints[$ap2['ssid']];
+        $ap3_pos = $accessPoints[$ap3['ssid']];
 
         // Realiza a triangulação usando as posições dos APs e os valores de RSSI
         // A triangulação exata deve ser implementada com base nos valores de RSSI
