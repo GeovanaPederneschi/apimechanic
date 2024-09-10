@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
         while (mysqli_stmt_fetch($statement)) {
 
             array_push($response, array(
-                "cpf_funcionario " => $cpf,
+                "cpf_funcionario" => $cpf,
 				"senha_funcionario" => $senha,
                 "email_funcionario" => $email,
                 "aniversario_funcionario" => $niver,
