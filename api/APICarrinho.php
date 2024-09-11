@@ -3,33 +3,48 @@ header('Content-Type: application/json');
 
 // Posições dos pontos de acesso (APs) na API
 $accessPoints = array(
-    'AP1' => array('x' => 5, 'y' => 5),
-    'AP2' => array('x' => 15, 'y' => 5),
-    'AP3' => array('x' => 10, 'y' => 15)
+    'AP1' => array('x' => 4.29, 'y' => 0),
+    'AP2' => array('x' => 6.09, 'y' => 2.35),
+    'AP3' => array('x' => 0, 'y' => 2.85)
 );
 
+// Função para converter RSSI para distância
+function rssiToDistance($rssi, $rssiRef, $n) {
+    return pow(10, ($rssiRef - $rssi) / (10 * $n));
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recebe os dados JSON enviados pelo ESP32
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
-    // Verifica se os dados estão corretos
     if (isset($data['access_points']) && count($data['access_points']) == 3) {
-        // Pega os dados dos três pontos de acesso mais próximos
+        // Pega os dados dos três pontos de acesso
         $ap1 = $data['access_points'][0];
         $ap2 = $data['access_points'][1];
         $ap3 = $data['access_points'][2];
 
-        // Obtenha as posições dos APs da API
-        $ap1_pos = $accessPoints[$ap1['ssid']];
-        $ap2_pos = $accessPoints[$ap2['ssid']];
-        $ap3_pos = $accessPoints[$ap3['ssid']];
+        // Converte RSSI para distâncias usando os valores de referência específicos
+        $d1 = rssiToDistance($ap1['rssi'], 50, 3);     // AP1: ref = 50, n = 3
+        $d2 = rssiToDistance($ap2['rssi'], 47, 3);     // AP2: ref = 47, n = 3
+        $d3 = rssiToDistance($ap3['rssi'], 47, 3.5);   // AP3: ref = 47, n = 3.5
 
-        // Realiza a triangulação usando as posições dos APs e os valores de RSSI
-        // A triangulação exata deve ser implementada com base nos valores de RSSI
-        // Aqui, um exemplo simples sem cálculo real
-        $x = ($ap1_pos['x'] + $ap2_pos['x'] + $ap3_pos['x']) / 3;
-        $y = ($ap1_pos['y'] + $ap2_pos['y'] + $ap3_pos['y']) / 3;
+        // Obtém as posições dos APs
+        $ap1_pos = $accessPoints['AP1'];
+        $ap2_pos = $accessPoints['AP2'];
+        $ap3_pos = $accessPoints['AP3'];
+
+        // Cálculo da posição usando trilateração
+        // Fórmulas baseadas em sistemas de equações para trilateração 2D
+        $A = 2 * ($ap2_pos['x'] - $ap1_pos['x']);
+        $B = 2 * ($ap2_pos['y'] - $ap1_pos['y']);
+        $C = pow($d1, 2) - pow($d2, 2) - pow($ap1_pos['x'], 2) + pow($ap2_pos['x'], 2) - pow($ap1_pos['y'], 2) + pow($ap2_pos['y'], 2);
+        $D = 2 * ($ap3_pos['x'] - $ap2_pos['x']);
+        $E = 2 * ($ap3_pos['y'] - $ap2_pos['y']);
+        $F = pow($d2, 2) - pow($d3, 2) - pow($ap2_pos['x'], 2) + pow($ap3_pos['x'], 2) - pow($ap2_pos['y'], 2) + pow($ap3_pos['y'], 2);
+
+        // Resolve para X e Y
+        $x = ($C * $E - $F * $B) / ($E * $A - $B * $D);
+        $y = ($C * $D - $A * $F) / ($B * $D - $A * $E);
 
         // Prepara os dados para enviar ao site
         $positionData = array(
@@ -43,10 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Resposta ao ESP32
         echo json_encode(array('status' => 'success', 'position' => $positionData));
     } else {
-        // Caso os dados não estejam corretos
         echo json_encode(array('status' => 'error', 'message' => 'Dados inválidos'));
     }
 } else {
-    // Resposta se o método não for POST
     echo json_encode(array('status' => 'error', 'message' => 'Método não suportado'));
 }
+?>
