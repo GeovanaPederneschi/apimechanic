@@ -18,19 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $senha = $_POST['senha'];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from tb_funcionario WHERE email_funcionario = ? AND senha_funcionario = ?");
+    "SELECT * from tb_funcionario WHERE email_func = ? AND senha_func = ?");
     mysqli_stmt_bind_param($statement,"ss",$email,$senha);
 
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
     mysqli_stmt_bind_result($statement,
-						    $cpf,
-						    $senha,
-                            $email,
-                            $niver,
+                            $id,
                             $nome,
-                            $numero,
-                            $tipo
+                            $dataNascimento,
+						    $cpf,
+                            $email,
+                            $senha,
+                            $idFilial,
+                            $dataAdimissão,
+                            $telefone,
+                            $endereço,
+                            $idCargo
                         ); 
  
 
@@ -39,13 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
         while (mysqli_stmt_fetch($statement)) {
 
             array_push($response, array(
-                "cpf_funcionario" => $cpf,
-				"senha_funcionario" => $senha,
-                "email_funcionario" => $email,
-                "aniversario_funcionario" => $niver,
-                "nome_funcionario" => $nome,
-                "numero_funcionario" => $numero,
-                "tipo_funcionario" => $tipo
+                "id" => $id,
+                "nome_func" => $nome,
+                "data_nascimento" => $dataNascimento,
+                "cpf_func" => $cpf,
+				"senha_func" => $senha,
+                "email_func" => $email,
+                "filial_id" => $idFilial,
+                "data_admissao" => $dataAdimissão,
+                "telefone" => $telefone,
+                "endereco" => $endereço,
+                "cargo_id" => $idCargo
                 )
             );
         }

@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ap3_pos = $accessPoints['AP3'];
 
         // Cálculo da posição usando trilateração
-        // Fórmulas baseadas em sistemas de equações para trilateração 2D
         $A = 2 * ($ap2_pos['x'] - $ap1_pos['x']);
         $B = 2 * ($ap2_pos['y'] - $ap1_pos['y']);
         $C = pow($d1, 2) - pow($d2, 2) - pow($ap1_pos['x'], 2) + pow($ap2_pos['x'], 2) - pow($ap1_pos['y'], 2) + pow($ap2_pos['y'], 2);
@@ -42,9 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $E = 2 * ($ap3_pos['y'] - $ap2_pos['y']);
         $F = pow($d2, 2) - pow($d3, 2) - pow($ap2_pos['x'], 2) + pow($ap3_pos['x'], 2) - pow($ap2_pos['y'], 2) + pow($ap3_pos['y'], 2);
 
-        // Resolve para X e Y
-        $x = ($C * $E - $F * $B) / ($E * $A - $B * $D);
-        $y = ($C * $D - $A * $F) / ($B * $D - $A * $E);
+        // Ajuste nas fórmulas para evitar divisões por zero ou resultados inconsistentes
+        if (($E * $A - $B * $D) != 0 && ($B * $D - $A * $E) != 0) {
+            // Resolve para X e Y
+            $x = ($C * $E - $F * $B) / ($E * $A - $B * $D);
+            $y = ($C * $D - $A * $F) / ($B * $D - $A * $E);
+        } else {
+            // Caso ocorra algum problema de divisão por zero
+            $x = 0;
+            $y = 0;
+        }
 
         // Prepara os dados para enviar ao site
         $positionData = array(
