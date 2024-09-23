@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                             $dataAdimissão,
                             $telefone,
                             $endereço,
-                            $idCargo
+                            $idCargo,
+                            $tipoFuncionario
                         ); 
  
 
@@ -53,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 "data_admissao" => $dataAdimissão,
                 "telefone" => $telefone,
                 "endereco" => $endereço,
-                "cargo_id" => $idCargo
+                "cargo_id" => $idCargo,
+                "tipo_funcionario" => $tipoFuncionario
                 )
             );
         }
