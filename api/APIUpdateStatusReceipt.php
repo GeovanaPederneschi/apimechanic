@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     `datatime_finalizado` = NOW()
     WHERE `id` = ?");
     
-    mysqli_stmt_bind_param($statement,"si",$status);
+    mysqli_stmt_bind_param($statement,"si",$status,$idDemanda);
 
     mysqli_stmt_execute($statement);
   
