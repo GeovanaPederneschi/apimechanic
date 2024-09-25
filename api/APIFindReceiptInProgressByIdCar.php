@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 				"datatime_cadastro" => $horaCadastro,
                 "datatime_finalizado" => $horaFinalizado,
                 "idtb_r_demanda_pecas" => $idDemandaPeca,
-                "data_admissao" => $dataAdimissão,
                 "id_tb_peca" => $idPeca,
                 "quantidade" => $quant,
                 "idPontoColeta" => $idPontoColeta,
