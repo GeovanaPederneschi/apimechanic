@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     $senha = $_POST['senha'];
 
     $statement = mysqli_prepare($con, 
-    "SELECT * from tb_funcionario WHERE email_func = ? AND senha_func = ?");
+    "SELECT * from view_funcionario_carrinho WHERE email_func = ? AND senha_func = ?");
     mysqli_stmt_bind_param($statement,"ss",$email,$senha);
 
     mysqli_stmt_execute($statement);
@@ -35,7 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                             $telefone,
                             $endereço,
                             $idCargo,
-                            $tipoFuncionario
+                            $tipoFuncionario,
+                            $idCarrinho,
+                            $numIdent
                         ); 
  
 
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 "id" => $id,
                 "nome_func" => $nome,
                 "data_nascimento" => $dataNascimento,
-                "cpf_func" => $cpf,
+                "CPF" => $cpf,
 				"senha_func" => $senha,
                 "email_func" => $email,
                 "filial_id" => $idFilial,
@@ -55,7 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
                 "telefone" => $telefone,
                 "endereco" => $endereço,
                 "cargo_id" => $idCargo,
-                "tipo_funcionario" => $tipoFuncionario
+                "tipo_funcionario" => $tipoFuncionario,
+                "id_carrinho" => $idCarrinho,
+                "num_ident" => $numIdent
                 )
             );
         }
