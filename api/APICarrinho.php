@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Resposta ao ESP32
         echo json_encode(array('status' => 'success', 'position' => $positionData));
     } else {
-        echo json_encode(array('status' => 'error', 'message' => 'Dados inválidos'));
+        echo json_encode(array('status' => 'error', 'message' => 'Dados inválidos', 'data'=> $data));
     }
 } else {
     echo json_encode(array('status' => 'error', 'message' => 'Método não suportado'));
