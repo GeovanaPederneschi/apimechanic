@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ap3 = $data['access_points'][2];
 
         // Converte RSSI para distâncias
-        $d1 = rssiToDistance($ap1['rssi'], 50, 3);
-        $d2 = rssiToDistance($ap2['rssi'], 47, 3);
-        $d3 = rssiToDistance($ap3['rssi'], 47, 3.5);
+        $d1 = rssiToDistance($ap1['rssi'], -50, 3);
+        $d2 = rssiToDistance($ap2['rssi'], -47, 3);
+        $d3 = rssiToDistance($ap3['rssi'], -47, 3.5);
 
         // Verifica se as distâncias são válidas
         if ($d1 <= 0 || $d2 <= 0 || $d3 <= 0) {
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $y = limitValue($y, 0, 10);
 
         // Log de depuração para a posição calculada
-        $debugMessages[] = "Posição calculada: x=$x, y=$y";
+        //$debugMessages[] = "Posição calculada: x=$x, y=$y";
 
         // Prepara os dados para enviar ao site
         $positionData = array(
