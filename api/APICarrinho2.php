@@ -97,8 +97,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Escreve os dados da posição em um arquivo JSON
         //file_put_contents('position.json', json_encode($positionData));
 
-        // Resposta ao ESP32 com logs de depuração
-        echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages));
+        // Dados a serem enviados
+        $data = array(
+            'x' => $x,
+            'y' => $y,
+            'id' => $data['carrinho_id'],
+            'app'=> "Mechanic"
+        );
+
+        // URL da API onde os dados devem ser enviados
+        $apiUrl = 'https://apimechanic.vercel.app/api/APIInsertLocation.php'; // Substitua pela URL correta da sua API
+
+        // Inicializa a sessão cURL
+        $ch = curl_init($apiUrl);
+
+        // Configura as opções da requisição
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Retorna a resposta como string
+        curl_setopt($ch, CURLOPT_POST, true); // Indica que a requisição é do tipo POST
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); // Adiciona os dados ao corpo da requisição
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); // Define o tipo de conteúdo como JSON
+
+        // Executa a requisição
+        $response = curl_exec($ch);
+
+        // Verifica se houve erro na requisição
+        if (curl_errno($ch)) {
+            $errorMessage = curl_error($ch);
+            echo "Erro: $errorMessage";
+        } else {
+           // Resposta ao ESP32 com logs de depuração
+            echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages));
+        }
+
+        // Fecha a sessão cURL
+        curl_close($ch);
     } else {
         echo json_encode(array('status' => 'error', 'message' => 'Dados inválidos', 'debug' => $debugMessages));
     }
