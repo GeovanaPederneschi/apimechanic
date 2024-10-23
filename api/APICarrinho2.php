@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 $accessPoints = array(
     'AP1' => array('x' => 0, 'y' => 4.65),       // Coordenadas em metros
     'AP2' => array('x' => 0, 'y' => 0),
-    'AP3' => array('x' => 8.56, 'y' => 4.65\)
+    'AP3' => array('x' => 8.56, 'y' => 4.65)
 );
 
 // Array para armazenar mensagens de depuração
