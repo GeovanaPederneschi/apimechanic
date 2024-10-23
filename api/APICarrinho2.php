@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Verifica se houve erro na requisição
         if (curl_errno($ch)) {
             $errorMessage = curl_error($ch);
-            echo "Erro: $errorMessage";
+            echo json_encode(array('status' => 'error', 'message' => $errorMessage, 'debug' => $debugMessages));
         } else {
            // Resposta ao ESP32 com logs de depuração
             echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages));
