@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode(array('status' => 'error', 'message' => $errorMessage, 'debug' => $debugMessages));
         } else {
            // Resposta ao ESP32 com logs de depuração
-            echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages));
+            echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages, 'insercao' => $response));
         }
 
         // Fecha a sessão cURL
