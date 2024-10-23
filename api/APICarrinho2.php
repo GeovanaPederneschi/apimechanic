@@ -3,9 +3,9 @@ header('Content-Type: application/json');
 
 // Posições dos pontos de acesso (APs)
 $accessPoints = array(
-    'AP1' => array('x' => 4.29, 'y' => 0),       // Coordenadas em metros
-    'AP2' => array('x' => 6.09, 'y' => 2.35),
-    'AP3' => array('x' => 0, 'y' => 2.85)
+    'AP1' => array('x' => 0, 'y' => 4.65),       // Coordenadas em metros
+    'AP2' => array('x' => 0, 'y' => 0),
+    'AP3' => array('x' => 8.56, 'y' => 4.65\)
 );
 
 // Array para armazenar mensagens de depuração
@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ap3 = $data['access_points'][2];
 
         // Converte RSSI para distâncias
-        $d1 = rssiToDistance($ap1['rssi'], -50, 3);
-        $d2 = rssiToDistance($ap2['rssi'], -47, 3);
-        $d3 = rssiToDistance($ap3['rssi'], -47, 3.5);
+        $d1 = rssiToDistance($ap1['rssi'], -27, 2);
+        $d2 = rssiToDistance($ap2['rssi'], -27, 2);
+        $d3 = rssiToDistance($ap3['rssi'], -35, 3.5);
 
         // Verifica se as distâncias são válidas
         if ($d1 <= 0 || $d2 <= 0 || $d3 <= 0) {
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $d3 = limitValue($d3, 0, 200);
 
         // Log de depuração para distâncias
-        $debugMessages[] = "Distâncias: d1=$d1, d2=$d2, d3=$d3";
+        $debugMessages[] = "Distancias: d1=$d1, d2=$d2, d3=$d3";
 
         // Obtém as posições dos APs
         $ap1_pos = $accessPoints['AP1'];
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $data = array(
             'x' => $x,
             'y' => $y,
-            'id' => $data['carrinho_id'],
+            'id_carrinho' => $data['carrinho_id'],
             'app'=> "Mechanic"
         );
 
