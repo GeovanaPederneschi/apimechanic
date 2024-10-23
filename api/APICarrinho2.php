@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         );
 
         // Escreve os dados da posição em um arquivo JSON
-        file_put_contents('position.json', json_encode($positionData));
+        //file_put_contents('position.json', json_encode($positionData));
 
         // Resposta ao ESP32 com logs de depuração
         echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages));
