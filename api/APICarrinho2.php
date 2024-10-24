@@ -14,8 +14,8 @@ $debugMessages = array();
 // Função para converter RSSI para distância
 function rssiToDistance($rssi, $rssiRef, $n) {
     global $debugMessages;
-    $distance =  pow(10, ($rssiRef - $rssi) / 10*$n);
-    //return $rssi/$rssiRef;
+    //$distance =  pow(10, ($rssiRef - $rssi) / 10*$n);
+    $distance =  $rssi/$rssiRef;
     $debugMessages[] = "RSSI: $rssi -> Distância calculada: $distance metros"; // Armazena a mensagem de depuração
     return $distance;
 }
