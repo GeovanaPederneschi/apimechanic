@@ -3,9 +3,9 @@ header('Content-Type: application/json');
 
 // Posições dos pontos de acesso (APs)
 $accessPoints = array(
-    'AP1' => array('x' => 0, 'y' => 4.65),       // Coordenadas em metros
-    'AP2' => array('x' => 0, 'y' => 0),
-    'AP3' => array('x' => 8.56, 'y' => 4.65)
+    'AP1' => array('x' => 0, 'y' => 0),       // Coordenadas em metros
+    'AP2' => array('x' => 0, 'y' => 15),
+    'AP3' => array('x' => -4,12, 'y' => 15)
 );
 
 // Array para armazenar mensagens de depuração
@@ -14,8 +14,8 @@ $debugMessages = array();
 // Função para converter RSSI para distância
 function rssiToDistance($rssi, $rssiRef, $n) {
     global $debugMessages;
-    //$distance = pow(10, ($rssiRef - $rssi) / (10 * $n));
-    $distance = $rssi/$rssiRef;
+    return pow(10, ($rssiRef - $rssi) / 10*$n);
+    //return $rssi/$rssiRef;
     $debugMessages[] = "RSSI: $rssi -> Distância calculada: $distance metros"; // Armazena a mensagem de depuração
     return $distance;
 }
@@ -36,9 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ap3 = $data['access_points'][2];
 
         // Converte RSSI para distâncias
-        $d1 = rssiToDistance($ap1['rssi'], -27, 2);
+        $d1 = rssiToDistance($ap1['rssi'], -30, 2);
         $d2 = rssiToDistance($ap2['rssi'], -27, 2);
-        $d3 = rssiToDistance($ap3['rssi'], -35, 3.5);
+        $d3 = rssiToDistance($ap3['rssi'], -40, 3.5);
 
         // Verifica se as distâncias são válidas
         if ($d1 <= 0 || $d2 <= 0 || $d3 <= 0) {
@@ -83,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $y = ($C * $D - $A * $F) / $denominatorY;
 
         // Limita os resultados para o intervalo esperado
-        $x = limitValue($x, 0, 10);
-        $y = limitValue($y, 0, 10);
+        //$x = limitValue($x, 0, 10);
+        //$y = limitValue($y, 0, 10);
 
         // Log de depuração para a posição calculada
         //$debugMessages[] = "Posição calculada: x=$x, y=$y";
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Verifica se houve erro na requisição
         if (curl_errno($ch)) {
             $errorMessage = curl_error($ch);
-            echo json_encode(array('status' => 'error', 'message' => $errorMessage, 'debug' => $debugMessages));
+            echo json_encode(array('status' => 'error', 'position' => $positionData, 'message' => $errorMessage, 'debug' => $debugMessages));
         } else {
            // Resposta ao ESP32 com logs de depuração
             echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages, 'insercao' => $response));
