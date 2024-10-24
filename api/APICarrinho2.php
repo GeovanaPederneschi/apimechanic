@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //file_put_contents('position.json', json_encode($positionData));
 
         // Dados a serem enviados
-        $data = array(
+        $dataInsertion = array(
             'x' => $x,
             'y' => $y,
             'id_carrinho' => $data['carrinho_id'],
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Configura as opções da requisição
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Retorna a resposta como string
         curl_setopt($ch, CURLOPT_POST, true); // Indica que a requisição é do tipo POST
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); // Adiciona os dados ao corpo da requisição
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($dataInsertion)); // Adiciona os dados ao corpo da requisição
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); // Define o tipo de conteúdo como JSON
 
         // Executa a requisição
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode(array('status' => 'error', 'position' => $positionData, 'message' => $errorMessage, 'debug' => $debugMessages));
         } else {
            // Resposta ao ESP32 com logs de depuração
-            echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages, 'insercao' => $response));
+            echo json_encode(array('status' => 'success', 'position' => $positionData, 'debug' => $debugMessages, 'insercao' => $response, "ala"=>$dataInsertion));
         }
 
         // Fecha a sessão cURL
