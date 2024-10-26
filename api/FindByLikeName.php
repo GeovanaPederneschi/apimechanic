@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
 
             array_push($response, array(
                 "id" => $id,
-				"nome_peca" => $dataCadastro,
+				"nome_peca" => $nomePeca,
 				"descricao" => $tipoCliente
                 )
             );
