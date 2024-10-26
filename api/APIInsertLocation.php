@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $data['app'] = "Mechanic") {
     $statement = mysqli_prepare($con, 
     "INSERT INTO `tb_localizacao_carrinho` (`id_tb_carrinho`, `datatime_registro`, `x_localizacao`, `y_localizacao`, `id_demanda`) 
     VALUES (?, NOW(), ?, ?, ?)");
-    mysqli_stmt_bind_param($statement,"iiii",$id, $x, $y, $idDemanda);
+    mysqli_stmt_bind_param($statement,"iddi",$id, $x, $y, $idDemanda);
 
     mysqli_stmt_execute($statement);
   
