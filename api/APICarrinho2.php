@@ -3,9 +3,9 @@ header('Content-Type: application/json');
 
 // Posições dos pontos de acesso (APs)
 $accessPoints = array(
-    'AP1' => array('x' => 4,29, 'y' => 0),       // Coordenadas em metros
-    'AP2' => array('x' => 1,05, 'y' => -2,94),
-    'AP3' => array('x' => 0, 'y' => 2,85)
+    'AP1' => array('x' => 3.36, 'y' => 0),       // Coordenadas em metros
+    'AP2' => array('x' => 0, 'y' => 0),
+    'AP3' => array('x' => 3.36 'y' => 8.46)
 );
 
 // Array para armazenar mensagens de depuração
@@ -75,9 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $d2 = rssiToDistance($ap2['rssi'], -27, 2);
         $d3 = rssiToDistance($ap3['rssi'], -40, 3.5); */
 
-        $d1 = rssiToDistanceTest($ap1['rssi'], [-15, -40]);
+        $d1 = rssiToDistanceTest($ap1['rssi'], [-25, -30]);
         $d2 = rssiToDistanceTest($ap2['rssi'], [-35, -49]);
-        $d3 = rssiToDistanceTest($ap3['rssi'], [-22, -42]);
+        $d3 = rssiToDistanceTest($ap3['rssi'], [-20, -30]);
 
         // Verifica se as distâncias são válidas
         if ($d1 <= 0 || $d2 <= 0 || $d3 <= 0) {
