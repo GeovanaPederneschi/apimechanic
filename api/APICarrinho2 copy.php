@@ -49,8 +49,8 @@ function rssiToDistanceTest($rssi, $apData) {
 // Função para converter RSSI para distância
 function rssiToDistance($rssi, $rssiRef, $n) {
     global $debugMessages;
-    //return pow(10, ($rssiRef - $rssi) / 10*$n);
-    return $rssi/$rssiRef;
+    //$distance =  pow(10, ($rssiRef - $rssi) / 10*$n);
+    $distance =  $rssi/$rssiRef;
     $debugMessages[] = "RSSI: $rssi -> Distância calculada: $distance metros"; // Armazena a mensagem de depuração
     return $distance;
 }
@@ -71,18 +71,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ap3 = $data['access_points'][2];
 
         // Converte RSSI para distâncias
-        /* $d1 = rssiToDistance($ap1['rssi'], -15, 2.5);
-        $d2 = rssiToDistance($ap2['rssi'], -35, 2.5);
-        $d3 = rssiToDistance($ap3['rssi'], -22, 3.5);
- */
-    $d1 = rssiToDistanceTest($ap1['rssi'], [-25, -30]);
-    $d2 = rssiToDistanceTest($ap2['rssi'], [-35, -49]);
-    $d3 = rssiToDistanceTest($ap3['rssi'], [-20, -30]);
+        /* $d1 = rssiToDistance($ap1['rssi'], -30, 2);
+        $d2 = rssiToDistance($ap2['rssi'], -27, 2);
+        $d3 = rssiToDistance($ap3['rssi'], -40, 3.5); */
 
-        $debugMessages[] = "Distancias: d1=$d1, d2=$d2, d3=$d3";
+        $d1 = rssiToDistanceTest($ap1['rssi'], [-25, -30]);
+        $d2 = rssiToDistanceTest($ap2['rssi'], [-35, -49]);
+        $d3 = rssiToDistanceTest($ap3['rssi'], [-20, -30]);
 
         // Verifica se as distâncias são válidas
         if ($d1 <= 0 || $d2 <= 0 || $d3 <= 0) {
+            $debugMessages[] = 'Distâncias inválidas.';
             echo json_encode(array('status' => 'error', 'message' => 'Valores de RSSI resultaram em distâncias inválidas.', 'debug' => $debugMessages));
             exit;
         }
@@ -90,7 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Ajusta as distâncias para um valor máximo razoável
         $d1 = limitValue($d1, 0, 200);
         $d2 = limitValue($d2, 0, 200);
-        $d3 = limitValue($d3, 0, 200);        
+        $d3 = limitValue($d3, 0, 200);
+
+        // Log de depuração para distâncias
+        $debugMessages[] = "Distancias: d1=$d1, d2=$d2, d3=$d3";
 
         // Obtém as posições dos APs
         $ap1_pos = $accessPoints['AP1'];
@@ -124,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //$y = limitValue($y, 0, 10);
 
         // Log de depuração para a posição calculada
-        //$debugMessages[] = "Posição calculada: x=$x, y=$y";
+        $debugMessages[] = "Posição calculada: x=$x, y=$y";
 
         // Prepara os dados para enviar ao site
         $positionData = array(
