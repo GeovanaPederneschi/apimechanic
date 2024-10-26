@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
            $response["sucesso"] = false;
            $response["error"] = "no queries";
     }
-
+    $response["test"] = true;
     echo json_encode($response);
     
 } else {
