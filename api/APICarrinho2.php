@@ -3,13 +3,48 @@ header('Content-Type: application/json');
 
 // Posições dos pontos de acesso (APs)
 $accessPoints = array(
-    'AP1' => array('x' => 0, 'y' => 0),       // Coordenadas em metros
-    'AP2' => array('x' => 0, 'y' => 15),
-    'AP3' => array('x' => -4,12, 'y' => 15)
+    'AP1' => array('x' => 4,29, 'y' => 0),       // Coordenadas em metros
+    'AP2' => array('x' => 1,05, 'y' => -2,94),
+    'AP3' => array('x' => 0, 'y' => 2,85)
 );
 
 // Array para armazenar mensagens de depuração
 $debugMessages = array();
+
+function rssiToDistanceTest($rssi, $apData) {
+    // Dados do ponto de acesso
+    $distances = [1, 2]; // Distâncias em metros
+    $rssis = $apData; // Recebe os RSSIs do ponto de acesso
+
+    // Se o RSSI medido é maior que -15, calcula distância < 1 metro
+    if ($rssi > $rssis[0]) {
+        $d1 = $distances[0]; // 1 metro
+        $rssi1 = $rssis[0]; // -15
+        // Interpolação linear
+        $distance = $d1 * pow(10, ($rssi1 - $rssi) / 10); // Ajuste na fórmula para menos de 1 metro
+        return $distance; // Retorna a distância calculada
+    }
+    
+    // Se o RSSI medido é menor que -15 e maior que -40, calcula entre 1 e 2 metros
+    if ($rssi <= $rssis[0] && $rssi > $rssis[1]) {
+        // Regra de três para calcular a distância
+        $d1 = $distances[0]; // 1 metro
+        $d2 = $distances[1]; // 2 metros
+        $rssi1 = $rssis[0]; // -15
+        $rssi2 = $rssis[1]; // -40
+
+        // Interpolação linear
+        $distance = $d1 + (($d2 - $d1) * ($rssi - $rssi1) / ($rssi2 - $rssi1));
+        return $distance; // Retorna a distância calculada
+    }
+    
+    // Se o RSSI medido é menor que -40, retorna uma distância > 2 metros
+    if ($rssi <= $rssis[1]) {
+        return 2 + (abs($rssi - $rssis[1]) / 10); // Distância aproximada para > 2 metros
+    }
+
+    return -1; // Retorna -1 se não encontrar um intervalo válido
+}
 
 // Função para converter RSSI para distância
 function rssiToDistance($rssi, $rssiRef, $n) {
@@ -36,9 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ap3 = $data['access_points'][2];
 
         // Converte RSSI para distâncias
-        $d1 = rssiToDistance($ap1['rssi'], -30, 2);
+        /* $d1 = rssiToDistance($ap1['rssi'], -30, 2);
         $d2 = rssiToDistance($ap2['rssi'], -27, 2);
-        $d3 = rssiToDistance($ap3['rssi'], -40, 3.5);
+        $d3 = rssiToDistance($ap3['rssi'], -40, 3.5); */
+
+        $d1 = rssiToDistanceTest($ap1['rssi'], [-15, -40]);
+        $d2 = rssiToDistanceTest($ap2['rssi'], [-35, -49]);
+        $d3 = rssiToDistanceTest($ap3['rssi'], [-22, -42]);
 
         // Verifica se as distâncias são válidas
         if ($d1 <= 0 || $d2 <= 0 || $d3 <= 0) {
