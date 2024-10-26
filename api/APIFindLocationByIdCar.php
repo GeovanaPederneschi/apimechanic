@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['app'] = "Mechanic") {
     mysqli_set_charset($con, "utf8");
 
     $idCarrinho = $_POST['id_carrinho'];
-    $senha = $_POST['senha'];
 
     $statement = mysqli_prepare($con, 
     "SELECT * FROM view_localizacao_carrinho_demanda WHERE id_tb_carrinho = ? ORDER BY idtb_localizacao_carrinho DESC LIMIT 1; ");
