@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //$y = limitValue($y, 0, 10);
 
         // Log de depuração para a posição calculada
-        //$debugMessages[] = "Posição calculada: x=$x, y=$y";
+        $debugMessages[] = "Posição calculada: x=$x, y=$y";
 
         // Prepara os dados para enviar ao site
         $positionData = array(
